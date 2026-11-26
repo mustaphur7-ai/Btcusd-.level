@@ -1,0 +1,27 @@
+name: Analyze BTC levels
+on:
+  schedule:
+    - cron: "30 0 * * *"   # Asian, 03:30 EAT
+    - cron: "0 9 * * *"    # London, 12:00 EAT
+    - cron: "33 14 * * *"  # New York, 17:33 EAT
+  workflow_dispatch:
+concurrency:
+  group: analyze
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python make_levels.py
+      - name: Commit if changed
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add levels.json data_prev.json
+          git diff --cached --quiet || (git commit -m "Update levels" && git pull --rebase && git push)

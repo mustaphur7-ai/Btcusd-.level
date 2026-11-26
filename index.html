@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BTCUSD Levels</title><link rel="stylesheet" href="style.css"></head><body>
+<header><h1>BTCUSD Levels</h1><div id="price">--</div><small><i id="dot"></i> <span id="updated">Connecting</span></small></header>
+<div id="banner"></div>
+<nav><button data-tab="dash">Dashboard</button><button data-tab="chart">Chart</button></nav>
+<main id="dash"><div class="boxes"><div id="session">Loading</div><div id="countdown"></div></div>
+<h2>Levels</h2><table id="ladder"></table>
+<p class="muted">Information only, not financial advice. Levels are estimates from options positioning and Bitcoin is highly volatile.</p></main>
+<main id="chart" hidden><div id="tf"></div><div id="wrap"><canvas></canvas><div id="msg">Loading chart</div><button id="now" hidden>Jump to now</button></div></main>
+<script src="chart.js"></script><script src="app.js"></script></body></html>
